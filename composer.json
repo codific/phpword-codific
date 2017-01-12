@@ -6,7 +6,7 @@
         "docx", "OOXML", "OpenXML", "Office Open XML", "ISO IEC 29500", "WordprocessingML",
         "RTF", "Rich Text Format", "doc", "odt", "OpenDocument", "PDF", "HTML"
     ],
-    "homepage": "http://phpoffice.github.io",
+    "homepage": "https://github.com/codific/phpword-codific",
     "type": "library",
     "license": "LGPL-3.0",
     "authors": [
@@ -67,7 +67,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Codific\\": ""
+            "PhpOffice\\PhpWord\\": "src/PhpWord"
         }
     }
 }
