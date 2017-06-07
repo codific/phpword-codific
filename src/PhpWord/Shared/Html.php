@@ -50,7 +50,7 @@ class Html
         $html = str_replace(array('&lt;', '&gt;', '&amp;'), array('_lt_', '_gt_', '_amp_'), $html);
         $html = html_entity_decode($html, ENT_QUOTES, 'UTF-8');
         $html = str_replace('&', '&amp;', $html);
-        $html = str_replace(array('_lt_', '_gt_', '_amp_'), array('&amp;lt;', '&amp;gt;', '&amp;'), $html);
+        $html = str_replace(array('_lt_', '_gt_', '_amp_'), array('&amp;lt;', '&amp;gt;', '&amp;amp;'), $html);
 
         if ($fullHTML === false) {
             $html = '<body>' . $html . '</body>';
