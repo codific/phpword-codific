@@ -46,11 +46,12 @@ class Html
 
         // Preprocess: remove all line ends, decode HTML entity,
         // fix ampersand and angle brackets and add body tag for HTML fragments
-        $html = str_replace(array("\n", "\r"), '', $html);
-        $html = str_replace(array('&lt;', '&gt;', '&amp;'), array('_lt_', '_gt_', '_amp_'), $html);
-        $html = html_entity_decode($html, ENT_QUOTES, 'UTF-8');
+        $html = str_replace(["\n", "\r"], '', $html);
         $html = str_replace('&', '&amp;', $html);
-        $html = str_replace(array('_lt_', '_gt_', '_amp_'), array('&amp;lt;', '&amp;gt;', '&amp;amp;'), $html);
+        $html = str_replace(['&amp;euml;', '&amp;egrave;', '&amp;deg;', '&amp;nbsp;'], ['ë', 'è', '°', ' '], $html);
+        $html = str_replace(['&lt;', '&gt;', '&amp;'], ['_lt_', '_gt_', '_amp_'], $html);
+        $html = html_entity_decode($html, ENT_QUOTES, 'ISO-8859-1');
+        $html = str_replace(['_lt_', '_gt_', '_amp_'], ['&amp;lt;', '&amp;gt;', '&amp;amp;'], $html);
 
         if ($fullHTML === false) {
             $html = '<body>' . $html . '</body>';
