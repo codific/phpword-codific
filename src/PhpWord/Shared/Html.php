@@ -48,7 +48,7 @@ class Html
         // fix ampersand and angle brackets and add body tag for HTML fragments
         $html = str_replace(["\n", "\r"], '', $html);
         $html = str_replace('&', '&amp;', $html);
-        $html = str_replace(['&amp;euml;', '&amp;egrave;', '&amp;deg;', '&amp;nbsp;'], ['ë', 'è', '°', ' '], $html);
+        $html = str_replace(['&amp;euml;', '&amp;egrave;', '&amp;deg;', '&amp;nbsp;', '&amp;lt;', '&amp;gt;'], ['ë', 'è', '°', ' ', '‹', '›'], $html);
         $html = str_replace(['&lt;', '&gt;', '&amp;'], ['_lt_', '_gt_', '_amp_'], $html);
         $html = html_entity_decode($html, ENT_QUOTES, 'ISO-8859-1');
         $html = str_replace(['_lt_', '_gt_', '_amp_'], ['&amp;lt;', '&amp;gt;', '&amp;amp;'], $html);
@@ -63,7 +63,10 @@ class Html
         $dom->loadXML($html);
         $node = $dom->getElementsByTagName('body');
 
-        self::parseNode($node->item(0), $element);
+        if($node->length > 0)
+        {
+            self::parseNode($node->item(0), $element);
+        }
     }
 
     /**
