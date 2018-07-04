@@ -48,10 +48,16 @@ class Html
         // fix ampersand and angle brackets and add body tag for HTML fragments
         $html = str_replace(["\n", "\r"], '', $html);
         $html = str_replace('&', '&amp;', $html);
-        $html = str_replace(['&amp;euml;', '&amp;egrave;', '&amp;deg;', '&amp;nbsp;', '&amp;lt;', '&amp;gt;'], ['ë', 'è', '°', ' ', '‹', '›'], $html);
+        $html = str_replace(
+            ['&amp;euml;', '&amp;egrave;', '&amp;deg;', '&amp;nbsp;', '&amp;rsquo;', '&amp;lsquo;', '&amp;iuml;', '&amp;Iuml;', '&amp;eacute;', '&amp;Eacute;', '&amp;ldquo;', '&amp;rdquo;', '&amp;hellip;', '&amp;oacute;', '&amp;Oacute;', '&amp;agrave;', '&amp;uuml;', '&amp;lt;', '&amp;quot;', '&amp;frac34;', '&amp;ge;', '&amp;#39;', '&amp;gt;', '&amp;ouml;', '&amp;middot;', '&amp;reg;', '&amp;ecirc;', '&amp;mu;', '&amp;Agrave;', '&amp;Ouml;', '&amp;Ecirc;', '&amp;micro;', '&amp;aacute;', '&amp;Aacute;', '&amp;frac12;', '&amp;iacute;', '&amp;Iacute;', '&amp;ordm;', '&amp;frac14;'],
+            ['ë', 'è', '°', ' ', '‘', '’', 'ï', 'Ï', 'é', 'É', '“', '”', '…', 'ó', 'Ó', 'à', 'ü', '<', '"', '¾', '≥', "'", '>', 'ö', '·', '®', 'ê', 'μ', 'À', 'Ö', 'Ê', 'µ', 'á', 'Á', '½', 'í', 'Í', 'º', '¼'],
+            $html);
         $html = str_replace(['&lt;', '&gt;', '&amp;'], ['_lt_', '_gt_', '_amp_'], $html);
         $html = html_entity_decode($html, ENT_QUOTES, 'ISO-8859-1');
         $html = str_replace(['_lt_', '_gt_', '_amp_'], ['&amp;lt;', '&amp;gt;', '&amp;amp;'], $html);
+        $html = strip_tags($html, '<b><i><u><strong><br />');
+        $html = preg_replace('/<(?![budisgvn\/])/', '‹', $html);  // replacing < (that are not part of a tag) with ‹
+        $html = preg_replace('/(?<![budisgvnr"\/])>/', '›', $html);  // replacing > with ›
 
         if ($fullHTML === false) {
             $html = '<body>' . $html . '</body>';
