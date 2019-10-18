@@ -188,7 +188,7 @@ class Html
     {
         if ($node->nodeName != 'li') {
             $cNodes = $node->childNodes;
-            if (count($cNodes) > 0) {
+            if ($cNodes != null and count($cNodes) > 0) {
                 foreach ($cNodes as $cNode) {
                     // Added to get tables to work
                     $htmlContainers = array(
